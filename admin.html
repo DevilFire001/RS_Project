@@ -1,183 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>RS Project | Add Product</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Inter, Arial, sans-serif;
-      background: #f4f6f8;
-      color: #1f2933;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RS Project | Add Product</title>
 
-    header {
-      background: #0f172a;
-      color: #ffffff;
-      padding: 20px;
-      text-align: center;
-    }
+<style>
+body {
+  margin: 0;
+  font-family: Inter, Arial, sans-serif;
+  background: #f4f6f8;
+}
 
-    .wrapper {
-      max-width: 600px;
-      margin: 40px auto;
-      background: #ffffff;
-      padding: 25px;
-      border-radius: 10px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-    }
+header {
+  background: #0f172a;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
 
-    h2 {
-      margin-top: 0;
-      margin-bottom: 20px;
-      text-align: center;
-    }
+.wrapper {
+  max-width: 600px;
+  margin: 40px auto;
+  background: white;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+}
 
-    label {
-      display: block;
-      font-weight: 600;
-      margin-bottom: 6px;
-    }
+input, textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+}
 
-    input, textarea {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 18px;
-      border-radius: 6px;
-      border: 1px solid #cbd5e1;
-      font-size: 14px;
-    }
-
-    textarea {
-      resize: vertical;
-      min-height: 80px;
-    }
-
-    button {
-      width: 100%;
-      padding: 12px;
-      border: none;
-      border-radius: 6px;
-      background: #0f766e;
-      color: #ffffff;
-      font-size: 16px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.25s ease;
-    }
-
-    button:hover {
-      background: #115e59;
-    }
-
-    .note {
-      text-align: center;
-      font-size: 13px;
-      color: #64748b;
-      margin-top: 12px;
-    }
-  </style>
+button {
+  width: 100%;
+  padding: 12px;
+  background: #0f766e;
+  color: white;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+}
+</style>
 </head>
+
 <body>
 
 <header>
-  <h1>RS Project</h1>
-  <p>Reliable Products • Simple Ordering</p>
- 
+<h1>RS Project</h1>
+<p>Add Product</p>
 </header>
 
 <div class="wrapper">
-  <h2>Product Details</h2>
-
-  <label>Product Name</label>
-  <input type="text" id="name" placeholder="Enter product name">
-
-  <label>Price</label>
-  <input type="text" id="price" placeholder="₹500">
-
-  <label>Description</label>
-  <textarea id="description" placeholder="Enter product description"></textarea>
-
-  <label>Image URL</label>
-  <input type="text" id="image" placeholder="Paste image link here">
-
-  <button onclick="addProduct()">Add Product</button>
-
-  <p class="note">Product will instantly appear on the main page</p>
+<input id="name" placeholder="Product Name">
+<input id="price" placeholder="Price">
+<textarea id="description" placeholder="Description"></textarea>
+<input id="image" placeholder="Image URL">
+<button onclick="addProduct()">Add Product</button>
 </div>
 
-<script>
-  function addProduct() {
-    const name = document.getElementById('name').value;
-    const price = document.getElementById('price').value;
-    const description = document.getElementById('description').value;
-    const image = document.getElementById('image').value;
-
-    if (!name || !price || !description || !image) {
-      alert('Please fill all fields');
-      return;
-    }
-
-    const product = { name, price, description, image };
-
-    // Load products from LocalStorage (added via Admin page)
-  const products = JSON.parse(localStorage.getItem('products')) || [];
-
-  if (products.length === 0) {
-    document.getElementById('productList').innerHTML = '<p style="grid-column:1/-1;text-align:center;color:#6b7280;">No products available. Please check back later.</p>';
-  }
-    products.push(product);
-    localStorage.setItem('products', JSON.stringify(products));
-
-    alert('Product added successfully');
-
-    document.getElementById('name').value = '';
-    document.getElementById('price').value = '';
-    document.getElementById('description').value = '';
-    document.getElementById('image').value = '';
-  }
-  
-  // Admin navigation with passcode
-  document.getElementById('adminBtn').addEventListener('click', () => {
-    const passcode = prompt('Enter admin passcode');
-    if (passcode === '@Rsproject') {
-      window.location.href = 'admin.html';
-    } else if (passcode !== null) {
-      alert('Wrong passcode');
-    }
-  });
-</script>
-
-<script>
-// Load products from localStorage
-const productGrid = document.getElementById('productGrid');
-
-function loadProducts() {
-  const products = JSON.parse(localStorage.getItem('rs_products')) || [];
-  productGrid.innerHTML = '';
-
-  if (products.length === 0) {
-    productGrid.innerHTML = '<p style="color:#94a3b8;text-align:center">No products added yet</p>';
-    return;
-  }
-
-  products.forEach(p => {
-    const card = document.createElement('div');
-    card.className = 'product-card';
-    card.innerHTML = `
-      <img src="${p.image}" alt="${p.name}">
-      <h3>${p.name}</h3>
-      <p>${p.description}</p>
-      <strong>₹${p.price}</strong>
-      <a href="https://wa.me/919719458113?text=I%20want%20to%20order%20${encodeURIComponent(p.name)}" target="_blank">Order on WhatsApp</a>
-    `;
-    productGrid.appendChild(card);
-  });
-}
-
-loadProducts();
-</script>
+<script src="backend.js"></script>
 </body>
 </html>
 
