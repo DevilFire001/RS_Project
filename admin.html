@@ -83,7 +83,8 @@
 
 <header>
   <h1>RS Project</h1>
-  <p>Add New Product</p>
+  <p>Reliable Products • Simple Ordering</p>
+ 
 </header>
 
 <div class="wrapper">
@@ -136,8 +137,47 @@
     document.getElementById('description').value = '';
     document.getElementById('image').value = '';
   }
+  
+  // Admin navigation with passcode
+  document.getElementById('adminBtn').addEventListener('click', () => {
+    const passcode = prompt('Enter admin passcode');
+    if (passcode === '@Rsproject') {
+      window.location.href = 'admin.html';
+    } else if (passcode !== null) {
+      alert('Wrong passcode');
+    }
+  });
 </script>
 
+<script>
+// Load products from localStorage
+const productGrid = document.getElementById('productGrid');
+
+function loadProducts() {
+  const products = JSON.parse(localStorage.getItem('rs_products')) || [];
+  productGrid.innerHTML = '';
+
+  if (products.length === 0) {
+    productGrid.innerHTML = '<p style="color:#94a3b8;text-align:center">No products added yet</p>';
+    return;
+  }
+
+  products.forEach(p => {
+    const card = document.createElement('div');
+    card.className = 'product-card';
+    card.innerHTML = `
+      <img src="${p.image}" alt="${p.name}">
+      <h3>${p.name}</h3>
+      <p>${p.description}</p>
+      <strong>₹${p.price}</strong>
+      <a href="https://wa.me/919719458113?text=I%20want%20to%20order%20${encodeURIComponent(p.name)}" target="_blank">Order on WhatsApp</a>
+    `;
+    productGrid.appendChild(card);
+  });
+}
+
+loadProducts();
+</script>
 </body>
 </html>
 
