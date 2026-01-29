@@ -18,6 +18,20 @@
       color: white;
       padding: 22px;
       text-align: center;
+      position: relative;
+    }
+
+    header button {
+      position: absolute;
+      right: 20px;
+      top: 20px;
+      padding: 8px 14px;
+      border: none;
+      border-radius: 6px;
+      background: #e5e7eb;
+      color: #0f172a;
+      font-weight: 600;
+      cursor: pointer;
     }
 
     .container {
@@ -34,12 +48,6 @@
       border-radius: 10px;
       box-shadow: 0 4px 14px rgba(0,0,0,0.08);
       overflow: hidden;
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 22px rgba(0,0,0,0.12);
     }
 
     .card img {
@@ -55,7 +63,6 @@
     .card-content h3 {
       margin: 0 0 6px;
       font-size: 18px;
-      font-weight: 600;
     }
 
     .price {
@@ -67,7 +74,6 @@
 
     .card-content p {
       font-size: 14px;
-      line-height: 1.5;
       color: #4b5563;
       margin-bottom: 14px;
     }
@@ -98,6 +104,7 @@
 <header>
   <h1>RS Project</h1>
   <p>Reliable Products • Simple Ordering</p>
+  <button onclick="openAdmin()">Admin</button>
 </header>
 
 <div class="container" id="productList">
@@ -111,7 +118,7 @@
 <script>
   const productList = document.getElementById("productList");
 
-  // 🔑 IMPORTANT: Same key as Admin page
+  // Load products from localStorage
   const products = JSON.parse(localStorage.getItem("products")) || [];
 
   if (products.length === 0) {
@@ -137,9 +144,18 @@
           </a>
         </div>
       `;
-
       productList.appendChild(card);
     });
+  }
+
+  // Admin navigation with passcode
+  function openAdmin() {
+    const pass = prompt("Enter admin passcode");
+    if (pass === "@Rsproject") {
+      window.location.href = "admin.html";
+    } else if (pass !== null) {
+      alert("Wrong passcode");
+    }
   }
 </script>
 
