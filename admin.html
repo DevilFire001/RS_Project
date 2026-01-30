@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RS Project Admin</title>
+<title>RS Project | Admin Panel</title>
 
 <style>
 body{
@@ -25,29 +25,59 @@ header{
   background:white;
   padding:20px;
   border-radius:10px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.1);
 }
 
-input,textarea{
+h2{
+  margin-top:0;
+}
+
+input, textarea{
   width:100%;
   padding:10px;
-  margin-bottom:10px;
+  margin-bottom:12px;
+  border-radius:6px;
+  border:1px solid #ccc;
+  font-size:14px;
 }
 
 button{
-  padding:10px;
+  padding:12px;
   width:100%;
   background:#0f766e;
   color:white;
   border:none;
   border-radius:6px;
   cursor:pointer;
+  font-size:15px;
+  font-weight:600;
+}
+
+button:hover{
+  opacity:0.9;
 }
 
 .product-box{
-  border:1px solid #ddd;
-  padding:10px;
-  margin-top:10px;
-  border-radius:6px;
+  border:1px solid #e5e7eb;
+  padding:12px;
+  margin-top:12px;
+  border-radius:8px;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.product-actions{
+  display:flex;
+  gap:10px;
+}
+
+.product-actions button{
+  width:50%;
+}
+
+.delete-btn{
+  background:#dc2626;
 }
 </style>
 </head>
@@ -55,20 +85,30 @@ button{
 <body>
 
 <header>
-  <h1>Admin Panel</h1>
+  <h1>RS Project</h1>
+  <p>Admin Panel</p>
 </header>
 
 <div class="wrapper">
+  <h2>Add New Product</h2>
+
   <input id="name" placeholder="Product Name">
-  <input id="price" placeholder="Price">
-  <textarea id="description" placeholder="Description"></textarea>
+  <input id="price" placeholder="Price (₹)">
+  <textarea id="description" placeholder="Product Description"></textarea>
   <input id="image" placeholder="Image URL">
+
   <button onclick="addProduct()">Add Product</button>
 
-  <div id="adminProducts"></div>
+  <hr style="margin:20px 0;">
+
+  <h2>Manage Products</h2>
+  <div id="adminProducts">
+    <!-- Products will load here -->
+  </div>
 </div>
 
-<script src="backend.js"></script>
+<!-- 🔥 Firebase Backend -->
+<script src="firebase.js" type="module"></script>
+
 </body>
 </html>
-
