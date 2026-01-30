@@ -3,45 +3,51 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RS Project | Add Product</title>
+<title>RS Project Admin</title>
 
 <style>
-body {
-  margin: 0;
-  font-family: Inter, Arial, sans-serif;
-  background: #f4f6f8;
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:#f4f6f8;
 }
 
-header {
-  background: #0f172a;
-  color: white;
-  padding: 20px;
-  text-align: center;
+header{
+  background:#0f172a;
+  color:white;
+  padding:20px;
+  text-align:center;
 }
 
-.wrapper {
-  max-width: 600px;
-  margin: 40px auto;
-  background: white;
-  padding: 25px;
-  border-radius: 10px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+.wrapper{
+  max-width:600px;
+  margin:20px auto;
+  background:white;
+  padding:20px;
+  border-radius:10px;
 }
 
-input, textarea {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
+input,textarea{
+  width:100%;
+  padding:10px;
+  margin-bottom:10px;
 }
 
-button {
-  width: 100%;
-  padding: 12px;
-  background: #0f766e;
-  color: white;
-  border: none;
-  font-size: 16px;
-  cursor: pointer;
+button{
+  padding:10px;
+  width:100%;
+  background:#0f766e;
+  color:white;
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+.product-box{
+  border:1px solid #ddd;
+  padding:10px;
+  margin-top:10px;
+  border-radius:6px;
 }
 </style>
 </head>
@@ -49,19 +55,18 @@ button {
 <body>
 
 <header>
-<h1>RS Project</h1>
-<p>Add Product</p>
+  <h1>Admin Panel</h1>
 </header>
 
 <div class="wrapper">
-<input id="name" placeholder="Product Name">
-<input id="price" placeholder="Price">
-<textarea id="description" placeholder="Description"></textarea>
-<input id="image" placeholder="Image URL">
-<button onclick="addProduct()">Add Product</button>
-</div>
-<div id="adminProducts"></div>
+  <input id="name" placeholder="Product Name">
+  <input id="price" placeholder="Price">
+  <textarea id="description" placeholder="Description"></textarea>
+  <input id="image" placeholder="Image URL">
+  <button onclick="addProduct()">Add Product</button>
 
+  <div id="adminProducts"></div>
+</div>
 
 <script src="backend.js"></script>
 </body>
